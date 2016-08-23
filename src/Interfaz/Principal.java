@@ -5,6 +5,8 @@
  */
 package Interfaz;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hp 14
@@ -51,6 +53,12 @@ public class Principal extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel2.setText("Digite El Presupuesto Anual");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
+
+        txtAnual.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAnualKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtAnual, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 120, -1));
 
         cmbHacer.setBackground(new java.awt.Color(0, 0, 0));
@@ -107,6 +115,13 @@ public class Principal extends javax.swing.JFrame {
     private void cmbHacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbHacerActionPerformed
         String Pediatri,ginicolo,trauma;
        int capital,total,gine,pedia,trau;
+       
+       if (txtAnual.getText().trim().isEmpty()){
+         JOptionPane.showMessageDialog(this,"Digite El Presupuesto Anual ","error", JOptionPane.ERROR_MESSAGE);
+         txtAnual.requestFocusInWindow();
+        }
+       else{
+       
        capital=Integer.parseInt(txtAnual.getText());
        gine=(capital*40)/100;
        pedia=(capital*30)/100;
@@ -121,9 +136,17 @@ public class Principal extends javax.swing.JFrame {
         Pediatri=String.valueOf(pedia);
        txtPediatria.setText("$"+Pediatri);
        
-       
-        
+       }
+    
     }//GEN-LAST:event_cmbHacerActionPerformed
+
+    private void txtAnualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnualKeyTyped
+       char c=evt.getKeyChar(); 
+            
+          if(Character.isLetter(c)) { 
+              getToolkit().beep(); 
+              evt.consume();}
+    }//GEN-LAST:event_txtAnualKeyTyped
 
     /**
      * @param args the command line arguments
